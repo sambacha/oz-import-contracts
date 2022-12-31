@@ -1,0 +1,18 @@
+{
+  "name": "openzeppelin-imports",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sambacha/oz-import-contracts.git"
+  },
+  "keywords": [],
+  "author": "SEE CONTRIBUTORS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sambacha/oz-import-contracts/issues"
+  },
+  "homepage": "https://github.com/sambacha/oz-import-contracts#readme"
+}
