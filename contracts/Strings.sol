@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (utils/Strings.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (utils/Strings.sol)
+// https://github.com/OpenZeppelin/openzeppelin-contracts/pull/3670/files#diff-e402541b45f70ec8d3de9b9f87542d9eb52920601ac011a340e723c5b4b9d659
 
 pragma solidity ^0.8.0;
-
-import "./Math.sol";
 
 /**
  * @dev String operations.
@@ -17,7 +16,39 @@ library Strings {
      */
     function toString(uint256 value) internal pure returns (string memory) {
         unchecked {
-            uint256 length = Math.log10(value) + 1;
+            uint256 length = 1;
+
+            // compute log10(value), and add it to length
+            uint256 valueCopy = value;
+            if (valueCopy >= 10**64) {
+                valueCopy /= 10**64;
+                length += 64;
+            }
+            if (valueCopy >= 10**32) {
+                valueCopy /= 10**32;
+                length += 32;
+            }
+            if (valueCopy >= 10**16) {
+                valueCopy /= 10**16;
+                length += 16;
+            }
+            if (valueCopy >= 10**8) {
+                valueCopy /= 10**8;
+                length += 8;
+            }
+            if (valueCopy >= 10**4) {
+                valueCopy /= 10**4;
+                length += 4;
+            }
+            if (valueCopy >= 10**2) {
+                valueCopy /= 10**2;
+                length += 2;
+            }
+            if (valueCopy >= 10**1) {
+                length += 1;
+            }
+            // now, length is log10(value) + 1
+
             string memory buffer = new string(length);
             uint256 ptr;
             /// @solidity memory-safe-assembly
@@ -42,7 +73,33 @@ library Strings {
      */
     function toHexString(uint256 value) internal pure returns (string memory) {
         unchecked {
-            return toHexString(value, Math.log256(value) + 1);
+            uint256 length = 1;
+
+            // compute log256(value), and add it to length
+            uint256 valueCopy = value;
+            if (valueCopy >= 1 << 128) {
+                valueCopy >>= 128;
+                length += 16;
+            }
+            if (valueCopy >= 1 << 64) {
+                valueCopy >>= 64;
+                length += 8;
+            }
+            if (valueCopy >= 1 << 32) {
+                valueCopy >>= 32;
+                length += 4;
+            }
+            if (valueCopy >= 1 << 16) {
+                valueCopy >>= 16;
+                length += 2;
+            }
+            if (valueCopy >= 1 << 8) {
+                valueCopy >>= 8;
+                length += 1;
+            }
+            // now, length is log256(value) + 1
+
+            return toHexString(value, length);
         }
     }
 

@@ -3,7 +3,9 @@
 
 pragma solidity ^0.8.0;
 
-import { log256, log10 } from "./Math.sol";
+// import { log256, log10 } from "./Math.sol";
+
+import { Math } from  "./Math.sol";
 
 /**
  * @dev String operations.
